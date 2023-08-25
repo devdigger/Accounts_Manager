@@ -4,11 +4,11 @@ This project implements a simple banking system using Java and JDBC (Java Databa
 
 ## Features
 
+- Automatic database file creation.
 - Create new bank accounts with unique account numbers.
 - Deposit money into existing accounts.
 - Withdraw money from existing accounts, with checks for sufficient balance.
 - Check account balance and details.
-- Delete accounts with a zero balance.
 - Command-line interface for easy interaction.
 
 ## Prerequisites
