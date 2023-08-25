@@ -61,8 +61,7 @@ public class Accounts_manager
 		Scanner sc = new Scanner(System.in);
 		try 
 		{
-			Class.forName("org.sqlite.JDBC");
-        	c = DriverManager.getConnection("jdbc:sqlite:accounts.db");
+			c= DatabaseConnection.getConnection();
 			boolean exists = c.getMetaData().getTables(null, null, "BANK", null).next();
 			stmt = c.createStatement();
 			if(!exists)
@@ -74,7 +73,6 @@ public class Accounts_manager
 							" BALANCE        INT     NOT NULL) ";
 				stmt.executeUpdate(sql);
 				stmt.close();
-				c.close();
 				System.out.println("Table created successfully");
 			}
 			else{
@@ -103,6 +101,10 @@ public class Accounts_manager
 					name = sc.next();
 					System.out.print("Enter Account Number : ");
 					a_no = sc.nextInt();
+                    if(ob.checkVal(a_no)){
+                        System.out.println("ACCOUNT ALREADY EXISTS");
+                        continue;
+                    }
 					System.out.print("Enter Deposited Amount (0 if none) : ");
 					balance = sc.nextInt();
 					String sql = "INSERT INTO BANK (A_NO,NAME,BALANCE) " +
@@ -193,6 +195,7 @@ public class Accounts_manager
 				}
 				if(ch == 6)
 				{
+                    DatabaseConnection.closeConnection();
 					System.exit(0);
 				}
 			}
